@@ -16,6 +16,7 @@
 		567003F62A5DFFC000F2A2D9 /* ConnectRest_ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567003F52A5DFFC000F2A2D9 /* ConnectRest_ExampleTests.swift */; };
 		567004002A5DFFC000F2A2D9 /* ConnectRest_ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567003FF2A5DFFC000F2A2D9 /* ConnectRest_ExampleUITests.swift */; };
 		567004022A5DFFC000F2A2D9 /* ConnectRest_ExampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567004012A5DFFC000F2A2D9 /* ConnectRest_ExampleUITestsLaunchTests.swift */; };
+		567004102A5E029000F2A2D9 /* ConnectREST in Frameworks */ = {isa = PBXBuildFile; productRef = 5670040F2A5E029000F2A2D9 /* ConnectREST */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				567004102A5E029000F2A2D9 /* ConnectREST in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +145,9 @@
 			dependencies = (
 			);
 			name = "ConnectRest Example";
+			packageProductDependencies = (
+				5670040F2A5E029000F2A2D9 /* ConnectREST */,
+			);
 			productName = "ConnectRest Example";
 			productReference = 567003DB2A5DFFBD00F2A2D9 /* ConnectRest Example.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +220,9 @@
 				Base,
 			);
 			mainGroup = 567003D22A5DFFBD00F2A2D9;
+			packageReferences = (
+				5670040E2A5E029000F2A2D9 /* XCRemoteSwiftPackageReference "ConnectREST" */,
+			);
 			productRefGroup = 567003DC2A5DFFBD00F2A2D9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -602,6 +610,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5670040E2A5E029000F2A2D9 /* XCRemoteSwiftPackageReference "ConnectREST" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ace1ofspades/ConnectREST";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5670040F2A5E029000F2A2D9 /* ConnectREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5670040E2A5E029000F2A2D9 /* XCRemoteSwiftPackageReference "ConnectREST" */;
+			productName = ConnectREST;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 567003D32A5DFFBD00F2A2D9 /* Project object */;
 }

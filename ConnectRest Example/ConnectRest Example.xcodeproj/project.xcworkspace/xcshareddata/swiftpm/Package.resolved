@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "connectrest",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ace1ofspades/ConnectREST",
+      "state" : {
+        "branch" : "master",
+        "revision" : "99cf712c1bfbd4020bfe045669adc010ff5461ae"
+      }
+    }
+  ],
+  "version" : 2
+}
