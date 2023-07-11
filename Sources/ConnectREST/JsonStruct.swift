@@ -7,7 +7,7 @@
 
 import Foundation
 
-class JsonStruct: NSObject {
+public class JsonStruct: NSObject {
     var parameters: [String: Any] = [:]
     init(Data data: Data?) {
         super.init()

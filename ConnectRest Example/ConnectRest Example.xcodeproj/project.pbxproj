@@ -17,6 +17,9 @@
 		567004002A5DFFC000F2A2D9 /* ConnectRest_ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567003FF2A5DFFC000F2A2D9 /* ConnectRest_ExampleUITests.swift */; };
 		567004022A5DFFC000F2A2D9 /* ConnectRest_ExampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567004012A5DFFC000F2A2D9 /* ConnectRest_ExampleUITestsLaunchTests.swift */; };
 		567004102A5E029000F2A2D9 /* ConnectREST in Frameworks */ = {isa = PBXBuildFile; productRef = 5670040F2A5E029000F2A2D9 /* ConnectREST */; };
+		567004132A5E035500F2A2D9 /* BaseConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567004122A5E035500F2A2D9 /* BaseConnect.swift */; };
+		567004152A5E035C00F2A2D9 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567004142A5E035C00F2A2D9 /* BaseResponse.swift */; };
+		567004172A5E036E00F2A2D9 /* ExampleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567004162A5E036E00F2A2D9 /* ExampleService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +53,9 @@
 		567003FB2A5DFFC000F2A2D9 /* ConnectRest ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ConnectRest ExampleUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		567003FF2A5DFFC000F2A2D9 /* ConnectRest_ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectRest_ExampleUITests.swift; sourceTree = "<group>"; };
 		567004012A5DFFC000F2A2D9 /* ConnectRest_ExampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectRest_ExampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		567004122A5E035500F2A2D9 /* BaseConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConnect.swift; sourceTree = "<group>"; };
+		567004142A5E035C00F2A2D9 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
+		567004162A5E036E00F2A2D9 /* ExampleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,7 @@
 		567003DD2A5DFFBD00F2A2D9 /* ConnectRest Example */ = {
 			isa = PBXGroup;
 			children = (
+				567004112A5E033E00F2A2D9 /* Network */,
 				567003DE2A5DFFBD00F2A2D9 /* AppDelegate.swift */,
 				567003E02A5DFFBD00F2A2D9 /* SceneDelegate.swift */,
 				567003E22A5DFFBD00F2A2D9 /* ViewController.swift */,
@@ -127,6 +134,24 @@
 				567004012A5DFFC000F2A2D9 /* ConnectRest_ExampleUITestsLaunchTests.swift */,
 			);
 			path = "ConnectRest ExampleUITests";
+			sourceTree = "<group>";
+		};
+		567004112A5E033E00F2A2D9 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				567004182A5E037200F2A2D9 /* Services */,
+				567004122A5E035500F2A2D9 /* BaseConnect.swift */,
+				567004142A5E035C00F2A2D9 /* BaseResponse.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		567004182A5E037200F2A2D9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				567004162A5E036E00F2A2D9 /* ExampleService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,8 +291,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				567004152A5E035C00F2A2D9 /* BaseResponse.swift in Sources */,
 				567003E32A5DFFBD00F2A2D9 /* ViewController.swift in Sources */,
+				567004132A5E035500F2A2D9 /* BaseConnect.swift in Sources */,
 				567003DF2A5DFFBD00F2A2D9 /* AppDelegate.swift in Sources */,
+				567004172A5E036E00F2A2D9 /* ExampleService.swift in Sources */,
 				567003E12A5DFFBD00F2A2D9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
