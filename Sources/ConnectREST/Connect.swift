@@ -12,7 +12,7 @@ open class Connect {
     public var request: URLRequest!
     var task: URLSessionDataTask!
 
-    open var contentType: String? {
+    public var contentType: String? {
         didSet {
             let key = "Content-Type"
             let value = contentType
@@ -20,7 +20,7 @@ open class Connect {
         }
     }
 
-    open var accept: String? {
+    public var accept: String? {
         didSet {
             let key = "Accept"
             let value = accept
@@ -28,7 +28,7 @@ open class Connect {
         }
     }
 
-    open var acceptLanguage: String? {
+    public var acceptLanguage: String? {
         didSet {
             let key = "Accept-Language"
             let value = acceptLanguage
@@ -36,7 +36,7 @@ open class Connect {
         }
     }
 
-    open var acceptCountry: String? {
+    public var acceptCountry: String? {
         didSet {
             let key = "Accept-Country"
             let value = acceptCountry
@@ -44,7 +44,7 @@ open class Connect {
         }
     }
 
-    open var authorization: String? {
+    public var authorization: String? {
         didSet {
             let key = "Authorization"
             let value = authorization
@@ -98,7 +98,7 @@ open class Connect {
 }
 
 extension Connect {
-    @objc open func connect(_ completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void, IncludeProperties includeProperties: Bool = true) {
+    public func connect(_ completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void, IncludeProperties includeProperties: Bool = true) {
         if includeProperties, request.httpMethod != HttpMethod.get.rawValue {
             var parameters: [String: Any]? = jsonBody ?? [:]
             let mirror = Mirror(reflecting: self)
@@ -118,7 +118,7 @@ extension Connect {
         task.resume()
     }
 
-    @objc open func fakeConnect(IncludeProperties includeProperties: Bool = true) {
+    public func fakeConnect(IncludeProperties includeProperties: Bool = true) {
         if includeProperties, request.httpMethod != HttpMethod.get.rawValue {
             var parameters: [String: Any]? = jsonBody ?? [:]
             let mirror = Mirror(reflecting: self)
