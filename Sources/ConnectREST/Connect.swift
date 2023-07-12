@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Connect {
+open class Connect {
     public var session: URLSession!
     public var request: URLRequest!
     var task: URLSessionDataTask!
