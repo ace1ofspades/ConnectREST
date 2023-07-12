@@ -1,3 +1,6 @@
 # ConnectREST
 
-A description of this package.
+RestAPI connection package for swift
+
+
+Easy to use

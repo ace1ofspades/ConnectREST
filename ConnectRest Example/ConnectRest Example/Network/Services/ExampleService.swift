@@ -15,7 +15,7 @@ class TestService {
         var birthday: String?
         var countryCode: Int?
         init() {
-            super.init(Path: "/api/test", Method: .post)
+            super.init(Path: "/api/example", Method: .post)
             tokenRequired = false
         }
 
