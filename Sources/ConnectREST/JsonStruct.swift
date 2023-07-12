@@ -8,7 +8,7 @@
 import Foundation
 
 open class JsonStruct: NSObject {
-    var parameters: [String: Any] = [:]
+    public var parameters: [String: Any] = [:]
     public init(Data data: Data?) {
         super.init()
         if let data = data {
