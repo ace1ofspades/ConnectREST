@@ -12,7 +12,7 @@ open class Connect {
     public var request: URLRequest!
     var task: URLSessionDataTask!
 
-    public var contentType: String? {
+    open var contentType: String? {
         didSet {
             let key = "Content-Type"
             let value = contentType
@@ -20,7 +20,7 @@ open class Connect {
         }
     }
 
-    public var accept: String? {
+    open var accept: String? {
         didSet {
             let key = "Accept"
             let value = accept
@@ -28,7 +28,7 @@ open class Connect {
         }
     }
 
-    public var acceptLanguage: String? {
+    open var acceptLanguage: String? {
         didSet {
             let key = "Accept-Language"
             let value = acceptLanguage
@@ -36,7 +36,7 @@ open class Connect {
         }
     }
 
-    public var acceptCountry: String? {
+    open var acceptCountry: String? {
         didSet {
             let key = "Accept-Country"
             let value = acceptCountry
@@ -44,7 +44,7 @@ open class Connect {
         }
     }
 
-    public var authorization: String? {
+    open var authorization: String? {
         didSet {
             let key = "Authorization"
             let value = authorization
@@ -52,10 +52,10 @@ open class Connect {
         }
     }
 
-    public func configure() {
+    open func configure() {
     }
 
-    public var jsonBody: [String: Any]? {
+    open var jsonBody: [String: Any]? {
         if let data = request.httpBody {
             let json = try? JSONSerialization.jsonObject(with: data) as? Dictionary<String, Any>
             return json
@@ -63,20 +63,20 @@ open class Connect {
         return nil
     }
 
-    init(Path path: String, Method method: HttpMethod = .get) {
+    public init(Path path: String, Method method: HttpMethod = .get) {
         commonInit(Path: path, Method: method)
     }
 
-    init(Path path: String, Method method: HttpMethod = .get, Parameters parameters: Data) {
+    public init(Path path: String, Method method: HttpMethod = .get, Parameters parameters: Data) {
         commonInit(Path: path, Method: method, Parameters: parameters)
     }
 
-    init(Path path: String, Method method: HttpMethod = .get, Parameters parameters: Any) {
+    public init(Path path: String, Method method: HttpMethod = .get, Parameters parameters: Any) {
         let params = try? JSONSerialization.data(withJSONObject: parameters, options: [])
         commonInit(Path: path, Method: method, Parameters: params)
     }
 
-    init(Path path: String, Method method: HttpMethod = .get, Parameters parameters: String, Encoding encoding: String.Encoding = .utf8) {
+    public init(Path path: String, Method method: HttpMethod = .get, Parameters parameters: String, Encoding encoding: String.Encoding = .utf8) {
         let encoding = encoding
         let params = parameters.data(using: encoding)
         commonInit(Path: path, Method: method, Parameters: params)
@@ -98,7 +98,7 @@ open class Connect {
 }
 
 extension Connect {
-    public func connect(_ completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void, IncludeProperties includeProperties: Bool = true) {
+    @objc open func connect(_ completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void, IncludeProperties includeProperties: Bool = true) {
         if includeProperties, request.httpMethod != HttpMethod.get.rawValue {
             var parameters: [String: Any]? = jsonBody ?? [:]
             let mirror = Mirror(reflecting: self)
@@ -118,7 +118,7 @@ extension Connect {
         task.resume()
     }
 
-    public func fakeConnect(IncludeProperties includeProperties: Bool = true) {
+    @objc open func fakeConnect(IncludeProperties includeProperties: Bool = true) {
         if includeProperties, request.httpMethod != HttpMethod.get.rawValue {
             var parameters: [String: Any]? = jsonBody ?? [:]
             let mirror = Mirror(reflecting: self)
