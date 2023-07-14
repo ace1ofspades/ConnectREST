@@ -8,7 +8,7 @@
 import Foundation
 
 
-open class MapStruct {
+open class MapStruct: Codable {
     var parameters: [String: Any] = [:]
     public subscript(key: String) -> Any? {
         get {
@@ -28,5 +28,19 @@ open class MapStruct {
         } else if let data = object as? Data {
             parameters = (try? JSONSerialization.jsonObject(with: data) as? [String: Any]) ?? [:]
         }
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+
+        if let dictionary = try? container.decode([String: DecodeAny].self) {
+            self.parameters = dictionary
+        }
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = try encoder.singleValueContainer()
+        try? container.encode(EncodeAny(parameters))
+        
     }
 }
