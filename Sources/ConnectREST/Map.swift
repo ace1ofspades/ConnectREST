@@ -20,6 +20,14 @@ public struct Map<T: MapStruct>: Codable {
         self.wrappedValue = wrappedValue
     }
 
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+
+        if let dictionary = try? container.decode([String: DecodeAny].self) {
+            wrappedValue = T(dictionary)
+        }
+    }
+
     public func encode(to encoder: Encoder) throws {
         var container = try encoder.singleValueContainer()
         try? container.encode(EncodeAny(value?.parameters))
