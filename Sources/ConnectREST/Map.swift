@@ -8,19 +8,19 @@
 import Foundation
 
 @propertyWrapper
-struct Map<T: MapStruct>: Codable {
+public struct Map<T: MapStruct>: Codable {
     private var value: T?
 
-    var wrappedValue: T? {
+    public var wrappedValue: T? {
         get { value }
         set { value = newValue }
     }
 
-    init(wrappedValue: T?) {
+    public init(wrappedValue: T?) {
         self.wrappedValue = wrappedValue
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
 
         if let dictionary = try? container.decode([String: DecodeAny].self) {
@@ -28,9 +28,8 @@ struct Map<T: MapStruct>: Codable {
         }
     }
 
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = try encoder.singleValueContainer()
-        print(value?.parameters)
         try? container.encode(EncodeAny(value?.parameters))
         
     }

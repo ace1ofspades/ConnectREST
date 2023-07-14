@@ -9,7 +9,7 @@ import Foundation
 
 @dynamicMemberLookup
 open class Json: MapStruct {
-    subscript(dynamicMember key: String) -> Any? {
+    public subscript(dynamicMember key: String) -> Any? {
         get {
             return parameters[key]
         }

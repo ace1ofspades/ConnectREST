@@ -10,7 +10,7 @@ import Foundation
 
 open class MapStruct {
     var parameters: [String: Any] = [:]
-    subscript(key: String) -> Any? {
+    public subscript(key: String) -> Any? {
         get {
             if let any = parameters[key] as? DecodeAny {
                 return any.value
