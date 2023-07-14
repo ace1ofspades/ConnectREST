@@ -135,3 +135,13 @@ extension Connect {
         }
     }
 }
+
+extension URLResponse {
+    var statusCode: Int? {
+        if let response = self as? HTTPURLResponse {
+            let statusCode: Int = response.statusCode
+            return statusCode
+        }
+        return nil
+    }
+}
