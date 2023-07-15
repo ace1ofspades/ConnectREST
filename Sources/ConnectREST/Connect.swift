@@ -99,7 +99,7 @@ open class Connect {
 }
 
 extension Connect {
-    public func printForDebug(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
+    open func printForDebug(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
         #if !DEBUG
             return
         #endif
@@ -189,7 +189,7 @@ extension Connect {
 }
 
 extension URLResponse {
-    var statusCode: Int? {
+    public var statusCode: Int? {
         if let response = self as? HTTPURLResponse {
             let statusCode: Int = response.statusCode
             return statusCode
