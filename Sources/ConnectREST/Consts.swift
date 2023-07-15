@@ -8,10 +8,10 @@
 import Foundation
 
 
-public var baseURL = ""
-private var sharedSession: URLSession?
+var baseURL = ""
 
-public var sharedURLSession: URLSession {
+private var sharedSession: URLSession?
+var sharedURLSession: URLSession {
     if let session = sharedSession {
         return session
     } else {

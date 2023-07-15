@@ -12,68 +12,23 @@ open class Connect {
     public var request: URLRequest!
     var task: URLSessionDataTask!
     var errorHandler: (Error?) -> Void = { _ in }
-
-    public var contentType: String? {
-        didSet {
-            let key = "Content-Type"
-            let value = contentType
-            request.setValue(value, forHTTPHeaderField: key)
-        }
-    }
-
-    public var accept: String? {
-        didSet {
-            let key = "Accept"
-            let value = accept
-            request.setValue(value, forHTTPHeaderField: key)
-        }
-    }
-
-    public var acceptLanguage: String? {
-        didSet {
-            let key = "Accept-Language"
-            let value = acceptLanguage
-            request.setValue(value, forHTTPHeaderField: key)
-        }
-    }
-
-    public var acceptCountry: String? {
-        didSet {
-            let key = "Accept-Country"
-            let value = acceptCountry
-            request.setValue(value, forHTTPHeaderField: key)
-        }
-    }
-
-    public var authorization: String? {
-        didSet {
-            let key = "Authorization"
-            let value = authorization
-            request.setValue(value, forHTTPHeaderField: key)
-        }
-    }
-
-    open func configure() {
-    }
-
-    open func printForDebug(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
-        #if !DEBUG
-            return
-        #endif
-        var printText = """
-        \(data?.base64EncodedString())
-        \(response?.statusCode)
-        \(error?.localizedDescription)
-        \(request.url?.absoluteString)
-        """
-    }
     
-    open var jsonBody: [String: Any]? {
-        if let data = request.httpBody {
-            let json = try? JSONSerialization.jsonObject(with: data) as? Dictionary<String, Any>
-            return json
+    public static var baseUrl: String {
+        get {
+            return baseURL
         }
-        return nil
+        set {
+            baseURL = newValue
+        }
+    }
+
+    open func configure() {}
+
+    open func printForDebug(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> String? { DebugPrint.defaultPrint(request, data, response, error) }
+
+    open var jsonBody: [String: Any]? {
+        get { request.httpBody?.object }
+        set { request.httpBody = newValue?.data }
     }
 
     public init(Path path: String, Method method: HttpMethod = .get) {
@@ -94,7 +49,10 @@ open class Connect {
         let params = parameters.data(using: encoding)
         commonInit(Path: path, Method: method, Parameters: params)
     }
+}
 
+// Common Initilize Method
+extension Connect {
     private func commonInit(Path path: String, Method method: HttpMethod = .get, Parameters parameters: Data? = nil) {
         session = sharedURLSession
         request = URLRequest(url: URL(string: baseURL + path)!)
@@ -110,9 +68,24 @@ open class Connect {
     }
 }
 
+// Debug Print Method
 extension Connect {
+    func _printForDebug(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
+        #if !DEBUG
+            return
+        #endif
+
+        print("""
+
+        --------------- Debug Print ---------------
+        \(printForDebug(data, response, error) ?? "nil")
+        --------------- ----- ----- ---------------
+
+        """)
+    }
 }
 
+// Connect Methods
 extension Connect {
     public func connect(
         Data v1: ((Data?) -> Void)? = nil,
@@ -136,7 +109,7 @@ extension Connect {
         }
 
         task = session.dataTask(with: request, completionHandler: { data, response, error in
-            self.printForDebug(data, response, error)
+            self._printForDebug(data, response, error)
             DispatchQueue.main.async {
                 v1?(data)
                 v2?(response)
@@ -163,38 +136,11 @@ extension Connect {
         }
 
         task = session.dataTask(with: request, completionHandler: { data, response, error in
-            self.printForDebug(data, response, error)
+            self._printForDebug(data, response, error)
             DispatchQueue.main.async {
                 completionHandler(data, response, error)
             }
         })
         task.resume()
-    }
-
-    public func fakeConnect(IncludeProperties includeProperties: Bool = true) {
-        if includeProperties, request.httpMethod != HttpMethod.get.rawValue {
-            var parameters: [String: Any]? = jsonBody ?? [:]
-            let mirror = Mirror(reflecting: self)
-            for (name, value) in mirror.children {
-                if let propertyName = name {
-                    parameters?[propertyName] = value
-                }
-            }
-            var params: Data?
-            if let parameters = parameters, !parameters.isEmpty {
-                params = try? JSONSerialization.data(withJSONObject: parameters, options: [])
-                request.httpBody = params
-            }
-        }
-    }
-}
-
-extension URLResponse {
-    public var statusCode: Int? {
-        if let response = self as? HTTPURLResponse {
-            let statusCode: Int = response.statusCode
-            return statusCode
-        }
-        return nil
     }
 }
