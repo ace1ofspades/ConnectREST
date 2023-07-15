@@ -8,12 +8,28 @@
 import ConnectREST
 import Foundation
 
-class BaseResponse: JsonStruct {
-    var error: String?
-    var message: String?
+struct BaseResponse<T: Codable>: Codable {
+    
+    var data: T?
     var success: Bool?
+    
+    init(_ data: Data?) {
+        if let data = data,
+           let result = try? JSONDecoder().decode(BaseResponse<T>.self, from: data) {
+            self.data = result.data
+            self.success = result.success
+        }
+    }
+}
 
-    override init(Data data: Data?) {
-        super.init(Data: data)
+
+
+class BaseResponseClass<T>: MapStruct {
+    var data: T?
+    var success: Bool?
+    required init(_ object: Any?) {
+        super.init(object)
+        data => self["data"]
+        success => self["success"]
     }
 }

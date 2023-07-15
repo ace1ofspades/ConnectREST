@@ -20,6 +20,7 @@
 		567004132A5E035500F2A2D9 /* BaseConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567004122A5E035500F2A2D9 /* BaseConnect.swift */; };
 		567004152A5E035C00F2A2D9 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567004142A5E035C00F2A2D9 /* BaseResponse.swift */; };
 		567004172A5E036E00F2A2D9 /* ExampleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567004162A5E036E00F2A2D9 /* ExampleService.swift */; };
+		56E9FCE52A622FB500F0613D /* LoginResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E9FCE42A622FB500F0613D /* LoginResponseDto.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		567004122A5E035500F2A2D9 /* BaseConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConnect.swift; sourceTree = "<group>"; };
 		567004142A5E035C00F2A2D9 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		567004162A5E036E00F2A2D9 /* ExampleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleService.swift; sourceTree = "<group>"; };
+		56E9FCE42A622FB500F0613D /* LoginResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseDto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 		567004112A5E033E00F2A2D9 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				56E9FCE32A622FA800F0613D /* Model */,
 				567004182A5E037200F2A2D9 /* Services */,
 				567004122A5E035500F2A2D9 /* BaseConnect.swift */,
 				567004142A5E035C00F2A2D9 /* BaseResponse.swift */,
@@ -152,6 +155,14 @@
 				567004162A5E036E00F2A2D9 /* ExampleService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		56E9FCE32A622FA800F0613D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				56E9FCE42A622FB500F0613D /* LoginResponseDto.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,6 +307,7 @@
 				567004132A5E035500F2A2D9 /* BaseConnect.swift in Sources */,
 				567003DF2A5DFFBD00F2A2D9 /* AppDelegate.swift in Sources */,
 				567004172A5E036E00F2A2D9 /* ExampleService.swift in Sources */,
+				56E9FCE52A622FB500F0613D /* LoginResponseDto.swift in Sources */,
 				567003E12A5DFFBD00F2A2D9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

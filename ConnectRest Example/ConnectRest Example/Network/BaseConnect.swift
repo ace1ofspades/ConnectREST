@@ -8,11 +8,13 @@
 import Foundation
 import ConnectREST
 
-class BaseConnect:Connect {
-    var tokenRequired:Bool = false
+class BaseConnect: Connect {
+    var tokenRequired = false
     override func configure() {
-        if tokenRequired {
-            authorization = "Bearer JWT"
-        }
+        super.configure()
+        contentType = "application/json"
+        accept = "application/json"
+        authorization = tokenRequired ? "Bearer JWT Token" : nil
     }
 }
+

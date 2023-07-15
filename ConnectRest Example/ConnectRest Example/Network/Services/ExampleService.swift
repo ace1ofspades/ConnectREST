@@ -7,17 +7,17 @@
 
 import Foundation
 
-class TestService {
-    class SignUp: BaseConnect {
-        var username: String?
-        var fullname: String?
-        var email: String?
-        var birthday: String?
-        var countryCode: Int?
-        init() {
-            super.init(Path: "/api/example", Method: .post)
+class ExampleService {
+    class SignIn: BaseConnect {
+        
+        var email: String
+        var password: String
+
+        init(email: String, password: String) {
+            self.email = email
+            self.password = password
+            super.init(Path: "/api/Auth/SignIn", Method: .post)
             tokenRequired = false
         }
-
     }
 }
