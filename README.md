@@ -2,6 +2,20 @@
 
 ConnectREST is a Swift class used for making HTTP requests and handling responses. It allows you to make simple HTTP requests and receive the response.
 
+## Installation
+
+To use the Connect class in your project, you can add the ConnectREST package as a dependency. Follow the steps below to add the package to your project:
+
+1. Open your project in Xcode.
+
+2. Go to "File" -> "Swift Packages" -> "Add Package Dependency".
+
+3. In the "Choose Package Repository" dialog, enter the following URL: https://github.com/ace1ofspades/ConnectREST
+
+4. Click "Next" and select the version or branch you want to use.
+
+5. Click "Finish" to add the package to your project.
+
 ## Usage
 
 The `Connect` class can be used to make HTTP requests. Here is the basic usage of the class:
