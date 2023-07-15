@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import ConnectREST
+import MapStruct
 
 class LoginDtoClass: MapStruct {
     var token: String?

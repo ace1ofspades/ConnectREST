@@ -6,6 +6,7 @@
 //
 
 import ConnectREST
+import MapStruct
 import UIKit
 
 class ViewController: UIViewController {
@@ -14,7 +15,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
 
         Connect.baseUrl = "https://example.com"
-
     }
 
     // Single Request Example
@@ -24,15 +24,37 @@ class ViewController: UIViewController {
             "password": "password",
         ]
         let request = Connect(Path: "/api/example", Method: .post, Parameters: parameters)
-        request.connect(responseHandler(_:_:_:))
+
+        // use full responseHandler
+        // request.connect(responseHandler(_:_:_:))
+
+        // or use only for what you need
+        request.connect(
+            Data: { data in
+                if let data = data {
+                    // Data Arrived
+                }
+            },
+            Response: { response in
+                if let response = response {
+                    // Response Arrived
+                }
+            },
+            Error: { error in
+                if let error = error {
+                    // Error Happened
+                }
+            },
+            IncludeProperties: false
+        )
     }
-    
+
     // Example with service class
     func serviceClassExample() {
         let loginService = ExampleService.SignIn(email: "email", password: "password")
         loginService.connect(responseHandler(_:_:_:))
     }
-    
+
     func responseHandler(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
         if let error = error {
             // Error Happened

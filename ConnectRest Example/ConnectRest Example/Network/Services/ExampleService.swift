@@ -9,7 +9,6 @@ import Foundation
 
 class ExampleService {
     class SignIn: BaseConnect {
-        
         var email: String
         var password: String
 
