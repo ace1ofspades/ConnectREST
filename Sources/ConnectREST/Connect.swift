@@ -56,6 +56,18 @@ open class Connect {
     open func configure() {
     }
 
+    open func printForDebug(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
+        #if !DEBUG
+            return
+        #endif
+        var printText = """
+        \(data?.base64EncodedString())
+        \(response?.statusCode)
+        \(error?.localizedDescription)
+        \(request.url?.absoluteString)
+        """
+    }
+    
     open var jsonBody: [String: Any]? {
         if let data = request.httpBody {
             let json = try? JSONSerialization.jsonObject(with: data) as? Dictionary<String, Any>
@@ -99,17 +111,6 @@ open class Connect {
 }
 
 extension Connect {
-    open func printForDebug(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
-        #if !DEBUG
-            return
-        #endif
-        var printText = """
-        \(data?.base64EncodedString())
-        \(response?.statusCode)
-        \(error?.localizedDescription)
-        \(request.url?.absoluteString)
-        """
-    }
 }
 
 extension Connect {
