@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Yusuf Tekin on 7.07.2023.
 //
@@ -11,6 +11,7 @@ open class Connect {
     public var session: URLSession!
     public var request: URLRequest!
     var task: URLSessionDataTask!
+    var errorHandler: (Error?) -> Void = { _ in }
 
     public var contentType: String? {
         didSet {
@@ -98,6 +99,52 @@ open class Connect {
 }
 
 extension Connect {
+    public func printForDebug(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
+        #if !DEBUG
+            return
+        #endif
+        var printText = """
+        \(data?.base64EncodedString())
+        \(response?.statusCode)
+        \(error?.localizedDescription)
+        \(request.url?.absoluteString)
+        """
+    }
+}
+
+extension Connect {
+    public func connect(
+        Data v1: ((Data?) -> Void)? = nil,
+        Response v2: ((URLResponse?) -> Void)? = nil,
+        Error v3: ((Error?) -> Void)? = nil,
+        IncludeProperties includeProperties: Bool = true
+    ) {
+        if includeProperties, request.httpMethod != HttpMethod.get.rawValue {
+            var parameters: [String: Any]? = jsonBody ?? [:]
+            let mirror = Mirror(reflecting: self)
+            for (name, value) in mirror.children {
+                if let name = name {
+                    parameters?[name] = value
+                }
+            }
+            var params: Data?
+            if let parameters = parameters, !parameters.isEmpty {
+                params = try? JSONSerialization.data(withJSONObject: parameters, options: [])
+                request.httpBody = params
+            }
+        }
+
+        task = session.dataTask(with: request, completionHandler: { data, response, error in
+            self.printForDebug(data, response, error)
+            DispatchQueue.main.async {
+                v1?(data)
+                v2?(response)
+                v3?(error) ?? self.errorHandler(error)
+            }
+        })
+        task.resume()
+    }
+
     public func connect(_ completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void, IncludeProperties includeProperties: Bool = true) {
         if includeProperties, request.httpMethod != HttpMethod.get.rawValue {
             var parameters: [String: Any]? = jsonBody ?? [:]
@@ -114,7 +161,12 @@ extension Connect {
             }
         }
 
-        task = session.dataTask(with: request, completionHandler: completionHandler)
+        task = session.dataTask(with: request, completionHandler: { data, response, error in
+            self.printForDebug(data, response, error)
+            DispatchQueue.main.async {
+                completionHandler(data, response, error)
+            }
+        })
         task.resume()
     }
 
