@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "mapstruct",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ace1ofspades/MapStruct",
+      "state" : {
+        "branch" : "master",
+        "revision" : "6604b1418c80201d0d65ae08381d16dfcd0b1a0d"
+      }
+    }
+  ],
+  "version" : 2
+}
