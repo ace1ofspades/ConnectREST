@@ -28,4 +28,5 @@ public enum HttpMethod: String {
     case get = "GET"
     case put = "PUT"
     case patch = "PATCH"
+    case delete = "DELETE"
 }
